@@ -7,26 +7,18 @@
       <animate attributeName="x1" values="-100%;100%" dur="2.5s" repeatCount="indefinite" />
       <animate attributeName="x2" values="0%;200%" dur="2.5s" repeatCount="indefinite" />
     </linearGradient>
-    
-    <linearGradient id="borderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#404040;stop-opacity:1" />
-    </linearGradient>
 
     <filter id="glow">
-      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feGaussianBlur stdDeviation="5" result="blur" />
       <feComposite in="SourceGraphic" in2="blur" operator="over" />
     </filter>
   </defs>
 
-  <!-- Background Rounded Rectangle (Matching Site Style) -->
-  <rect x="26" y="156" width="460" height="200" rx="40" fill="#0a0a0a" />
-  
-  <!-- Border Rounded Rectangle -->
-  <rect x="36" y="166" width="440" height="180" rx="30" stroke="url(#borderGradient)" stroke-width="10" fill="none" />
+  <!-- Solid Background Square with larger corner radius (increased from 64 to 128) -->
+  <rect x="0" y="0" width="512" height="512" rx="128" fill="#0a0a0a" />
 
-  <!-- Shimmering Text 'tssv85' - Perfectly Centered -->
-  <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" font-family="Inter, sans-serif" font-weight="900" font-size="110" fill="url(#shimmer)" filter="url(#glow)">
-    tssv85
+  <!-- Shimmering Text 'tssv' - Optimized for small sizes -->
+  <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-weight="900" font-size="220" fill="url(#shimmer)" filter="url(#glow)" letter-spacing="-0.05em">
+    tssv
   </text>
 </svg>

@@ -298,7 +298,7 @@ class FaviconAnimator {
 
 // Initialize favicon shimmer
 document.addEventListener('DOMContentLoaded', () => {
-    new FaviconAnimator('favicon.svg?v=2');
+    new FaviconAnimator('favicon.svg?v=4');
 });
 
 window.addEventListener('scroll', debouncedScroll);
