@@ -243,4 +243,62 @@ const debouncedScroll = debounce(() => {
     highlightNavigation();
 }, 10);
 
+// ===========================
+// FAVICON SHIMMER EFFECT
+// ===========================
+
+class FaviconAnimator {
+    constructor(svgUrl) {
+        this.svgUrl = svgUrl;
+        this.canvas = document.createElement('canvas');
+        this.canvas.width = 32;
+        this.canvas.height = 32;
+        this.ctx = this.canvas.getContext('2d');
+        this.img = new Image();
+        this.link = document.querySelector("link[rel*='icon']");
+        this.angle = 0;
+
+        if (!this.link) {
+            this.link = document.createElement('link');
+            this.link.rel = 'icon';
+            document.head.appendChild(this.link);
+        }
+
+        this.img.onload = () => this.animate();
+        this.img.src = svgUrl;
+    }
+
+    animate() {
+        this.ctx.clearRect(0, 0, 32, 32);
+
+        // Draw the base SVG
+        this.ctx.drawImage(this.img, 0, 0, 32, 32);
+
+        // Create shimmering highlight
+        this.ctx.globalCompositeOperation = 'source-atop';
+        const gradient = this.ctx.createLinearGradient(
+            -32 + (this.angle % 128), 0,
+            0 + (this.angle % 128), 32
+        );
+
+        gradient.addColorStop(0, 'rgba(255, 255, 255, 0)');
+        gradient.addColorStop(0.5, 'rgba(255, 255, 255, 0.4)');
+        gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+        this.ctx.fillStyle = gradient;
+        this.ctx.fillRect(0, 0, 32, 32);
+
+        // Update favicon
+        this.link.href = this.canvas.toDataURL('image/png');
+
+        this.angle += 2;
+        requestAnimationFrame(() => this.animate());
+    }
+}
+
+// Initialize favicon shimmer
+document.addEventListener('DOMContentLoaded', () => {
+    new FaviconAnimator('favicon.svg?v=2');
+});
+
 window.addEventListener('scroll', debouncedScroll);
