@@ -8,13 +8,13 @@ let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
-    
+
     if (currentScroll > 100) {
         nav.classList.add('scrolled');
     } else {
         nav.classList.remove('scrolled');
     }
-    
+
     lastScroll = currentScroll;
 });
 
@@ -23,7 +23,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
-        
+
         if (target) {
             const offsetTop = target.offsetTop - 80;
             window.scrollTo({
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const animatedElements = document.querySelectorAll('[data-aos]');
     animatedElements.forEach(el => {
         observer.observe(el);
-        
+
         // Add delay if specified
         const delay = el.getAttribute('data-aos-delay');
         if (delay) {
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     const heroBackground = document.querySelector('.hero-background');
-    
+
     if (heroBackground) {
         heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
     }
@@ -87,12 +87,12 @@ const sections = document.querySelectorAll('section[id]');
 
 function highlightNavigation() {
     const scrollY = window.pageYOffset;
-    
+
     sections.forEach(section => {
         const sectionHeight = section.offsetHeight;
         const sectionTop = section.offsetTop - 150;
         const sectionId = section.getAttribute('id');
-        
+
         if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
@@ -113,13 +113,13 @@ window.addEventListener('scroll', highlightNavigation);
 function initTypingEffect() {
     const heroSubtitle = document.querySelector('.hero-subtitle');
     if (!heroSubtitle) return;
-    
+
     const text = heroSubtitle.textContent;
     heroSubtitle.textContent = '';
     heroSubtitle.style.opacity = '1';
-    
+
     let index = 0;
-    
+
     function type() {
         if (index < text.length) {
             heroSubtitle.textContent += text.charAt(index);
@@ -127,7 +127,7 @@ function initTypingEffect() {
             setTimeout(type, 100);
         }
     }
-    
+
     // Start typing after a short delay
     setTimeout(type, 500);
 }
@@ -145,7 +145,7 @@ class CursorTrail {
         this.mouse = { x: 0, y: 0 };
         this.init();
     }
-    
+
     init() {
         // Create cursor dots
         for (let i = 0; i < 3; i++) {
@@ -169,37 +169,37 @@ class CursorTrail {
                 y: 0
             });
         }
-        
+
         // Track mouse movement
         document.addEventListener('mousemove', (e) => {
             this.mouse.x = e.clientX;
             this.mouse.y = e.clientY;
             this.dots.forEach(dot => dot.element.style.opacity = '1');
         });
-        
+
         document.addEventListener('mouseleave', () => {
             this.dots.forEach(dot => dot.element.style.opacity = '0');
         });
-        
+
         // Animate dots
         this.animate();
     }
-    
+
     animate() {
         let x = this.mouse.x;
         let y = this.mouse.y;
-        
+
         this.dots.forEach((dot, index) => {
             dot.x += (x - dot.x) * (0.3 - index * 0.05);
             dot.y += (y - dot.y) * (0.3 - index * 0.05);
-            
+
             dot.element.style.left = dot.x + 'px';
             dot.element.style.top = dot.y + 'px';
-            
+
             x = dot.x;
             y = dot.y;
         });
-        
+
         requestAnimationFrame(() => this.animate());
     }
 }
@@ -216,7 +216,7 @@ if (window.innerWidth > 1024) {
 window.addEventListener('load', () => {
     document.body.style.opacity = '0';
     document.body.style.transition = 'opacity 0.5s ease';
-    
+
     setTimeout(() => {
         document.body.style.opacity = '1';
     }, 100);
